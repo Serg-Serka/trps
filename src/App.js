@@ -73,6 +73,14 @@ let App = () => {
                 Math.exp(-1 * (LSum + MAvg) * time));
     }
 
+    let systemRisk = 0;
+    Object.keys(initData.l).forEach(el => {
+        systemRisk += initData.l[el] * initData.r[el];
+    });
+    systemRisk = systemRisk * Math.pow(10, -4);
+
+    let Risk = 1000 * ((ReadinessCoeff * systemRisk) + systemRisk) / 2;
+
     const options = {
         responsive: true,
         plugins: {
@@ -134,6 +142,8 @@ let App = () => {
             <div className="col-4">
                 <h3>Average time: {TAvg}</h3>
                 <h3>Readiness coefficient: {ReadinessCoeff}</h3>
+                <h3>System risk: {systemRisk}</h3>
+                <h3>Risk: {Risk}</h3>
             </div>
         </div>
     );
